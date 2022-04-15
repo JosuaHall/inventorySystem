@@ -4,15 +4,9 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from flask_migrate import Migrate, migrate
 from datetime import datetime, timezone
-from app import app
+from app import app, db
 
-# adding configuration for using a sqlite database
 
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Ifa16A2019nD%21@localhost/inventorySystem'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://upfjvjyeygmihv:c0268e323fe1ab1b9c396e5ae2544ce6f86708c738c49ec3778f147019ce8402@ec2-34-194-158-176.compute-1.amazonaws.com:5432/d6njhra8vf1f9r'
-
-# Creating an SQLAlchemy instance
-db = SQLAlchemy(app)
 
 # Settings for migrations
 migrate = Migrate(app, db)
