@@ -1,0 +1,98 @@
+.app {
+  text-align: center;
+  color: rgb(80, 80, 80);
+  width: 100%;
+  height: 100%;
+  margin-top: 2em;
+}
+
+.table-area {
+  margin: auto;
+  width: 60%;
+}
+
+.table-area thead {
+  border-bottom: solid black 1px;
+}
+
+.table-area > :nth-child(even) {
+  background-color: aliceblue;
+}
+
+.table-area-wip {
+  font-size: smaller;
+  margin: auto;
+  width: 90%;
+}
+
+.table-area-wip thead {
+  border-bottom: solid black 1px;
+}
+
+.table-area-wip > :nth-child(even) {
+  background-color: aliceblue;
+}
+
+.alert {
+  width: 500px;
+  margin: auto;
+}
+.general-voucher {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  width: 80%;
+  padding: 1em;
+  border: solid gainsboro 1px;
+}
+
+table > :nth-child(even) {
+  background-color: aliceblue;
+}
+
+.general-voucher th {
+  white-space: nowrap;
+}
+.general-voucher table {
+  width: 90%;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.border{
+  border-top: solid black 1px;
+}
+
+.button-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+  margin-top: 10em;
+  width: 60%;
+}
+
+.form-spacing {
+  align-items: center;
+  margin: auto;
+  width: 30%;
+}
+.custom {
+  width: 200px;
+}
+
+.select-month-year {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 1em;
+}
+
+.picker {
+  display: flex;
+  flex-direction: column;
+}
