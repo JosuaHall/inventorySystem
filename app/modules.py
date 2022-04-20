@@ -19,7 +19,6 @@ class Account(db.Model):
 	# last_name: Used to store last name of the user
 	# Age: Used to store the age of the user
 	id = db.Column(db.Integer, primary_key=True)
-	category = db.Column(db.String(100), unique=False, nullable=False)
 	account_nr = db.Column(db.Integer, unique=True, nullable=False)   
 	vendor_name = db.Column(db.String(100), nullable=False)
 	children = relationship("GeneralVoucher")

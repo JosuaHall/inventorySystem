@@ -48,6 +48,22 @@
   padding: 1em;
   border: solid gainsboro 1px;
 }
+.general-voucher-preview {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  width: 80%;
+  padding: 1em;
+  border: solid gainsboro 1px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.general-voucher-preview table{
+  width: 80%;
+}
 
 table > :nth-child(even) {
   background-color: aliceblue;

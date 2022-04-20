@@ -32,14 +32,13 @@ def account():
 	# form paccount_names and store it in our database. Remember
 	# that inside the get the name should exactly be the same
 	# as that in the html input fields
-	category = request.form.get("vendors")
 	account_nr = request.form.get("account_nr")
 	vendor_name = request.form.get("vendor_name")
 
 	# create an object of the account class of models and
 	# store data as a row in our datatable
-	if account_nr is not None and category != '' and vendor_name is not None:
-		v = Account(category=category, account_nr=account_nr, vendor_name=vendor_name)
+	if account_nr is not None and vendor_name is not None:
+		v = Account(account_nr=account_nr, vendor_name=vendor_name)
 		db.session.add(v)
 		db.session.commit()
 		return redirect('/vendor')
@@ -53,7 +52,7 @@ def work_in_process():
 	
 @app.route('/add_work_in_process')
 def add_work_in_process():
-	vendors = Account.query.all()
+	vendors = Account.query.order_by(Account.vendor_name.asc()).all()
 	return render_template('addWorkInProcess.html', vendors=vendors)
 
 @app.route('/add_wip', methods=["POST"])
@@ -183,11 +182,49 @@ def add_general_voucher():
 	vendors = Account.query.all()
 	l=[]
 	l_id=[]
+	l_account_nr=[]
+	cogs_total=0
 	for vendor in vendors:
 		l.append(vendor.vendor_name)
 		l_id.append(vendor.id)
+		l_account_nr.append(vendor.account_nr)
 	month = request.form.get("month")
 	year = request.form.get("year") # missing year check -> get year from date out of wip
+	wip = WorkInProcess.query.filter(extract('year',WorkInProcess.invoice_date) == year, WorkInProcess.month_invoiced==month, WorkInProcess.invoiced=="Yes").all()
+	cogs_sums = dict.fromkeys(l, 0)
+	for vendor in cogs_sums:
+		for data in wip:
+			if data.cogs_account.lower() == vendor.lower():
+				cogs_sums[vendor] += data.cogs
+		cogs_total += cogs_sums[vendor]
+	
+	#vendor_ids = []
+	#i = 1
+	#for c in cogs_sums:
+	#	vendor_ids += l_id[i-1]
+	#	voucher_year = year
+	#	voucher_month = month
+	#	cogs = cogs_sums[c]
+	#	i += 1
+	#	general_voucher = GeneralVoucher(vendor_id=vendor_id, voucher_year=voucher_year,voucher_month=voucher_month, cogs=cogs)
+	#	db.session.add(general_voucher)
+	#try:
+	#	db.session.commit()
+	#	flash("General Voucher Added")
+	#except:
+	#	flash("A general voucher already exists for this year/month")
+
+	return render_template('generalVoucherPreview.html', account_nr=l_account_nr, vendor_ids=l_id, vendor_name=l, month=month, year=year, cogs_sums=cogs_sums, cogs_total=cogs_total)
+
+@app.route('/post_general_voucher/<year>/<month>')
+def post_general_voucher(year, month):
+	vendors = Account.query.all()
+	l=[]
+	l_id=[]
+	for vendor in vendors:
+		l.append(vendor.vendor_name)
+		l_id.append(vendor.id)
+	 # missing year check -> get year from date out of wip
 	wip = WorkInProcess.query.filter(extract('year',WorkInProcess.invoice_date) == year, WorkInProcess.month_invoiced==month, WorkInProcess.invoiced=="Yes").all()
 	cogs_sums = dict.fromkeys(l, 0)
 	for vendor in cogs_sums:

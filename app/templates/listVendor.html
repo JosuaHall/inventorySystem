@@ -15,13 +15,11 @@
         <table class="table-area">
             <thead>
                 <th>Account Number</th>
-                <th>Category</th>
                 <th>Vendor Name</th>
             </thead>
             {% for data in vendors %}
             <tbody>
                 <td>{{data.account_nr}}</td>
-                <td>{{data.category}}</td>
                 <td>{{data.vendor_name}}</td>
             </tbody>
             {% endfor%}

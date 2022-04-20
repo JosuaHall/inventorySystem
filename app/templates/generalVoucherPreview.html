@@ -1,0 +1,38 @@
+{% extends "createGeneralVoucher.html" %}
+
+{% block wip %}
+<div class="general-voucher-preview">
+    <div><h2>General Journal Voucher Preview</h2></div>
+    <div><span><h3>{{month}} </h3></span><span><h3>{{year}}</h3></span></div>
+    <table>
+        <thead class="border">
+            <th>GL Account #</th>
+            <th>COGS Account</th>
+            <th>Debit</th>
+            <th>Credit</th>
+        </thead>
+        <thead class="border">
+            <th>1202.000</th>
+            <th>WORK In PROGRESS INVENTORY</th>
+            <th></th>
+            <th>${{cogs_total}}</th>
+        </thead>
+        {% for i in range(vendor_ids|length) %}
+        <tbody class="table-area">
+            <td>{{account_nr[i]}}</td>
+            <td>{{vendor_name[i]}}</td>
+            <td>${{cogs_sums[vendor_name[i]]}}</td>
+            <td></td>
+        </tbody>
+        {% endfor%}
+        <tbody class="table-area border">
+            <td></td>
+            <td><b>Total:</b></td>
+            <td><b>${{cogs_total}}</b></td> 
+            <td><b>${{cogs_total}}</b></td> 
+        </tbody>     
+    </table>
+</div>
+<a href="/post_general_voucher/{{year}}/{{month}}" class="btn btn-success mt-4">Post General Voucher</a>
+</form>
+{% endblock %}

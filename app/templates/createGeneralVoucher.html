@@ -44,13 +44,16 @@
                     </div>
                     <div class="picker">
                         <label for="year">Year:</label>
-                        <input id="year" min="2021" max="3000" name="year" placeholder="year.." required></input>
+                        <input id="year" min="2021" max="3000" name="year" placeholder="year.."></input>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success mt-4">Create General Voucher</button>
+                <button type="submit" class="btn btn-success mt-4">Preview General Voucher</button>
             </form>
         </div>
-    <a class="btn btn-danger mt-5" href="/general_voucher">Back</a>
+        {% block wip %}
+            {% endblock %}
+        <div> <a class="btn btn-danger mt-5 mb-4 " href="/general_voucher">Back</a></div>
+   
 </body>
 </html>
 
